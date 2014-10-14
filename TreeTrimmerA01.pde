@@ -52,27 +52,9 @@
 #define YELLOW          0xFFE0  
 #define WHITE           0xFFFF
 
-
-#ifdef ADA_OLED
-#define VER_STR "v1.3o"
-#else
-#define VER_STR "v1.3"
-#endif
-
-#define BACKLIGHT_PIN 15 // PB7
-#define CONTRAST_PIN 36 // PE4
-
-#define SERIAL_BAUD 115200
-#define MAX_SOC 281.0F
-#define KW_FACTOR 74.73F // 80 is from ingineer, surfingslovak prefers 74.73
-#define LCD_UPDATE_MS 250 // update interval for LCD in ms
-#define SOCPCT_55B
-#define SHOW_KWH // show remaining pack KWh in line 1
-#define SHOW_KW // show KW usage on line 2
-
-
-
-
+//User Defs
+#define KWH_FACTOR 74.73F // 80 is from ingineer, surfingslovak prefers 74.73
+#define TEMP_UNITS 1 //Use C=1 or F=0
 
 
 // the Leaf's fuel bar display isn't tied to SOC, which I find very confusing,
