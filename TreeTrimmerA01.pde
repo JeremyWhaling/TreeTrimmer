@@ -56,36 +56,11 @@
 #define KWH_FACTOR 74.73F // 80 is from ingineer, surfingslovak prefers 74.73
 #define TEMP_UNITS 1 //Use C=1 or F=0
 
-
-// the Leaf's fuel bar display isn't tied to SOC, which I find very confusing,
-// because this means that as the battery ages or temperature changes, the bars
-// correspond to less
-// stored KWh in the battery.  When FIXED_FUEL_BARS is defined, instead of
-// displaying the same fuel bars as on the dash, the fuel display is directly
-// tied to SOC. My formula arbitrarily assigns 13 = 100% charge = 281 gids,
-// and the transition from 1 -> 0 is at 24 gids, which is the transition to
-// Very Low Battery.  When the battery gets this low, it's kind of useless to
-// use something as coarse as fuel bars, so when it displays 0, it's time to
-// look directly at the raw SOC values.
-// the fuel bars are displayed w/ 1 decimal place (e.g 9.2) so you always know
-// how "full" the current bar is
-//#define FIXED_FUEL_BARS
-
 typedef struct ev_data {
   uint16_t m_Soc;
   float m_SocPct;
-#ifdef SOCPCT_55B
-  char m_SocPct_55b[5]; // soc pct from msg 55b
-#endif
   float m_PackVolts;
   float m_PackAmps; // A
-#ifdef FIXED_FUEL_BARS
-  float m_FuelBars;
-#else
-  uint8_t m_FuelBars; // <= 12
-#endif // FIXED_FUEL_BARS
-  int16_t m_RPM;
-  int16_t m_MotorPower;//kW ??
 } EV_DATA,*PEV_DATA;
 
 EV_DATA g_EvData;
