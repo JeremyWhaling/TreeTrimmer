@@ -1,34 +1,57 @@
 // -*- C++ -*-
 /*
- * LeafCAN Firmware
+ * TreeTrimmer Firmware
  *
- * Copyright (c) 2012-2013 Sam C. Lin <lincomatic@gmail.com>
+ * Copyright (c) 2014 Jeremy Whaling <jeremy.whaling@gmail.com>
  * Maintainer: SCL
 
- * This file is part of LeafCAN
+ * This file is part of TreeTrimmer
 
- * LeafCAN is free software; you can redistribute it and/or modify
+ * TreeTrimmer is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
 
- * LeafCAN is distributed in the hope that it will be useful,
+ * TreeTrimmer is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
 
  * You should have received a copy of the GNU General Public License
- * along with LeafCAN; see the file COPYING.  If not, write to the
+ * along with TreeTrimmer; see the file COPYING.  If not, write to the
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-#include <LiquidCrystal.h>
-#include <can_lib.h>
+ 
+#include <can_lib.h> //CAN support for AT90CANxxx
+#include <Adafruit_GFX.h> //ADAfruit Graphics
+#include <Adafruit_SSD1351.h> //OLED display controller support
+#include <SPI.h> //controller is commanded over SPI
 
-#define V2 // v2 hardware
-// support Adafruit 16x2 OLED display http://www.adafruit.com/products/823
-// requires Adafruit's library: https://github.com/ladyada/Adafruit_CharacterOLED
-//#define ADA_OLED
+// SPI options for display: Software or Hardware driven
+// Option 1: Software- use any pins but slower
+//Adafruit_SSD1351 tft = Adafruit_SSD1351(cs, dc, mosi, sclk, rst);  
+
+// Option 2: Hardware- must use the hardware SPI pins
+//Adafruit_SSD1351 tft = Adafruit_SSD1351(cs, dc, rst);
+
+// You can use any (4 or) 5 pins 
+#define sclk 2
+#define mosi 3
+#define dc   4
+#define cs   5
+#define rst  6
+
+// Color definitions
+#define	BLACK           0x0000
+#define	BLUE            0x001F
+#define	RED             0xF800
+#define	GREEN           0x07E0
+#define CYAN            0x07FF
+#define MAGENTA         0xF81F
+#define YELLOW          0xFFE0  
+#define WHITE           0xFFFF
+
 
 #ifdef ADA_OLED
 #define VER_STR "v1.3o"
